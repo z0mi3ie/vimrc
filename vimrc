@@ -23,6 +23,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'klen/python-mode'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'flazz/vim-colorschemes'
+Plugin 'davidhalter/jedi-vim'
 
 " " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -44,13 +45,14 @@ execute pathogen#infect()
 " }}}
 " NERDTree  {{{
 
-autocmd vimenter * NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+"autocmd vimenter * NERDTree
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " }}}
 " Pymode {{{ 
 
 set foldlevelstart=10
+let g:pymode = 1
 let g:pymode_doc = 0
 let g:pymode_doc_key = 'K'
 let g:pymode_lint = 1
@@ -62,7 +64,7 @@ let g:pymode_syntax_all = 1
 let g:pymode_syntax_indent_errors = g:pymode_syntax_all
 let g:pymode_syntax_space_errors = g:pymode_syntax_all
 let g:pymode_folding = 0
-let g:pymode_options_max_line_length = 120
+let g:pymode_options_max_line_length = 100
 let g:pymode_quickfix_minheight = 3
 let g:pymode_quickfix_maxheight = 3
 let g:pymode_indent = 1
@@ -71,26 +73,24 @@ let g:pymode_lint_unmodified = 0
 let g:pymode_lint_on_fly = 0
 let g:pymode_lint_message = 0
 let g:pymode_lint_cwindow = 0
-let g:pymode_rope_completion = 1
+let g:pymode_rope = 0
+let g:pymode_rope_completion = 0
 let g:pymode_rope_complete_on_dot = 0
-let g:pymode_rope_completion_bind = '<C-Space>'
-let g:pymode_rope_autoimport = 1
+"let g:pymode_rope_completion_bind = '<C-Space>'
+let g:pymode_rope_autoimport = 0
 let g:pymode_rope_autoimport_modules = ['os', 'shutil', 'datetime']
 let g:pymode_rope_autoimport_import_after_complete = 0
 
 " }}}
 " TagBar {{{
-autocmd vimenter * Tagbar
+" autocmd vimenter * Tagbar
 " }}}
 "  Colors {{{
 
 syntax enable
 
-"colorscheme desert
+colorscheme gruvbox
 "set background=dark
-""let g:solarized_termcolors=256
-""set background=dark
-""colorscheme solarized
 
 " Set extra options when running in GUI mode
 if has("gui_running")
@@ -235,6 +235,22 @@ set viminfo^=%
 " Always show the status line
 set laststatus=2
 " }}}
+" Jedi {{{ 
+" Jedi vim auto completion settings
+let g:jedi#auto_initialization=1
+let g:jedi#auto_vim_configuration=1
+let g:jedi#use_tabs_not_buffers=0
+"let g:jedi#use_splits_not_buffers='<location>'
+"   can be set to 'top' 'left' 'right' 'bottom' 'winwidth'
+let g:jedi#popup_on_dot=1
+let g:jedi#popup_select_first=1
+let g:jedi#show_call_signatures=1
+
+" Get rid of doc buffer
+autocmd FileType python setlocal completeopt-=preview
+
+" }}}
+
 
 
 
