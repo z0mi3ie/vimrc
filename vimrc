@@ -24,6 +24,13 @@ Plugin 'klen/python-mode'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'davidhalter/jedi-vim'
+Plugin 'tpope/vim-endwise'
+Plugin 'ap/vim-css-color'
+Plugin 'pearofducks/ansible-vim'
+Plugin 'chase/nginx.vim'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-obsession'
+Plugin 'jistr/vim-nerdtree-tabs'
 
 " " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -64,7 +71,7 @@ let g:pymode_syntax_all = 1
 let g:pymode_syntax_indent_errors = g:pymode_syntax_all
 let g:pymode_syntax_space_errors = g:pymode_syntax_all
 let g:pymode_folding = 0
-let g:pymode_options_max_line_length = 100
+let g:pymode_options_max_line_length = 79
 let g:pymode_quickfix_minheight = 3
 let g:pymode_quickfix_maxheight = 3
 let g:pymode_indent = 1
@@ -89,7 +96,8 @@ let g:pymode_rope_autoimport_import_after_complete = 0
 
 syntax enable
 
-colorscheme gruvbox
+"colorscheme gruvbox
+colorscheme badwolf
 "set background=dark
 
 " Set extra options when running in GUI mode
@@ -116,6 +124,10 @@ set tabstop=4
 set ai "Auto indent
 set si "Smart indent
 set nowrap "Do not wrap lines
+
+autocmd FileType html setlocal shiftwidth=2 tabstop=2
+autocmd FileType rb setlocal shiftwidth=2 tabstop=2 expandtab
+autocmd FileType yml setlocal shiftwidth=2 tabstop=2
 
 " }}}
 " Movement {{{
@@ -249,6 +261,25 @@ let g:jedi#show_call_signatures=1
 " Get rid of doc buffer
 autocmd FileType python setlocal completeopt-=preview
 
+" Add the virtualenv's site-packages to vim path
+if has('python')
+py << EOF
+import os.path
+import sys
+import vim
+if 'VIRTUAL_ENV' in os.environ:
+    project_base_dir = os.environ['VIRTUAL_ENV']
+    sys.path.insert(0, project_base_dir)
+    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+    execfile(activate_this, dict(__file__=activate_this))
+EOF
+endif
+
+" }}}
+" Indent Guides {{{
+au VimEnter * IndentGuidesEnable
+let g:indent_guides_start_level=2
+let g:indent_guides_guide_size=1
 " }}}
 
 
