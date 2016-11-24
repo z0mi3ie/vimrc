@@ -1,5 +1,12 @@
-" Plugin Management {{{1
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vim Configuration
+" Kyle Vickers
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin Management
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set autochdir
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -38,26 +45,16 @@ filetype plugin indent on    " required
 " " To ignore plugin indent changes, instead use:
 filetype plugin on
 
-" " Brief help
-" " :PluginList       - lists configured plugins
-" " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" " :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-" "
-" " see :h vundle for more details or wiki for FAQ
-" " Put your non-Plugin stuff after this line
-
 execute pathogen#infect()
 
-" }}}
-" NERDTree  {{{
-
-"autocmd vimenter * NERDTree
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" NERDTree 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""autocmd vimenter * NERDTree
 "autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
-" }}}
-" Pymode {{{ 
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Pymode
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set foldlevelstart=10
 let g:pymode = 1
 let g:pymode_doc = 0
@@ -88,12 +85,14 @@ let g:pymode_rope_autoimport = 0
 let g:pymode_rope_autoimport_modules = ['os', 'shutil', 'datetime']
 let g:pymode_rope_autoimport_import_after_complete = 0
 
-" }}}
-" TagBar {{{
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" TagBar
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " autocmd vimenter * Tagbar
-" }}}
-"  Colors {{{
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Colors
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax enable
 
 "colorscheme gruvbox
@@ -111,12 +110,9 @@ if has("gui_running")
     set guitablabel=%M\ %t
 endif
 
-" }}}
-" Tabs {{{
-
-" }}}
-" Tabs & Indents {{{
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Tabs & Indents
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set expandtab
 set smarttab
 set shiftwidth=4
@@ -129,9 +125,9 @@ autocmd FileType html setlocal shiftwidth=2 tabstop=2
 autocmd FileType rb setlocal shiftwidth=2 tabstop=2 expandtab
 autocmd FileType yml setlocal shiftwidth=2 tabstop=2
 
-" }}}
-" Movement {{{
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Movement
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Treat long lines as break lines (useful when moving around in them)
 map j gj
 map k gk
@@ -145,9 +141,7 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-" }}}
-" Python Specific {{{
-
+" Python Specific
 au! FileType python setl nosmartindent
 
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
@@ -159,16 +153,9 @@ endfunc
 autocmd BufWrite *.py :call DeleteTrailingWS()
 autocmd BufWrite *.coffee :call DeleteTrailingWS()
 
-" }}}
-" Fold Marker {{{ 
-
-" foldmethod=marker
-" foldlevel=0
-" set modellines=1
-
-" }}}
-" Misc. Vim {{{
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vanilla Vim
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set history=700
 filetype plugin on
 filetype indent on
@@ -204,35 +191,6 @@ set lbr
 set tw=500
 set number
 
-" }}}
-" Buffers {{{
-
-" Close the current buffer
-map <leader>bd :Bclose<cr>
-
-" Close all the buffers
-map <leader>ba :1,1000 bd!<cr>
-
-" Useful mappings for managing tabs
-map <leader>tn :tabnew<cr>
-map <leader>to :tabonly<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove
-
-" Opens a new tab with the current buffer's path
-" Super useful when editing files in the same directory
-map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
-
-" Switch CWD to the directory of the open buffer
-map <leader>cd :cd %:p:h<cr>:pwd<cr>
-
-" Specify the behavior when switching between buffers 
-try
-  set switchbuf=useopen,usetab,newtab
-  set stal=2
-catch
-endtry
-
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
      \ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -242,12 +200,15 @@ autocmd BufReadPost *
 " Remember info about open buffers on close
 set viminfo^=%
 
-" }}}
-" Status Line {{{ 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Status Line
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Always show the status line
 set laststatus=2
-" }}}
-" Jedi {{{ 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Jedi
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Jedi vim auto completion settings
 let g:jedi#auto_initialization=1
 let g:jedi#auto_vim_configuration=1
@@ -275,15 +236,12 @@ if 'VIRTUAL_ENV' in os.environ:
 EOF
 endif
 
-" }}}
-" Indent Guides {{{
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Indent Guides
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 au VimEnter * IndentGuidesEnable
 let g:indent_guides_start_level=2
 let g:indent_guides_guide_size=1
-" }}}
-
-
-
 
 "    _______ _______ _______ _______ _______ _______ 
 "   |\     /|\     /|\     /|\     /|\     /|\     /|
@@ -293,6 +251,3 @@ let g:indent_guides_guide_size=1
 "   | +---+ | +---+ | +---+ | +---+ | +---+ | +---+ |
 "   |/_____\|/_____\|/_____\|/_____\|/_____\|/_____\|
 
-
-
-" vim:foldmethod=marker:foldlevel=0
