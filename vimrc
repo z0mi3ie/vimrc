@@ -38,6 +38,11 @@ Plugin 'chase/nginx.vim'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-obsession'
 Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'fatih/vim-go'
+Plugin 'artur-shaik/vim-javacomplete2'
+Plugin 'neomake/neomake'
+Plugin 'ervandew/supertab'
+Plugin 'posva/vim-vue'
 
 " " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -113,7 +118,7 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tabs & Indents
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set expandtab
+" set expandtab
 set smarttab
 set shiftwidth=4
 set tabstop=4
@@ -122,8 +127,12 @@ set si "Smart indent
 set nowrap "Do not wrap lines
 
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
-autocmd FileType rb setlocal shiftwidth=2 tabstop=2 expandtab
-autocmd FileType yml setlocal shiftwidth=2 tabstop=2
+autocmd FileType rb   setlocal shiftwidth=2 tabstop=2 expandtab
+autocmd FileType yml  setlocal shiftwidth=2 tabstop=2
+autocmd FileType yaml setlocal shiftwidth=2 tabstop=2
+autocmd FileType go   setlocal shiftwidth=2 tabstop=2 expandtab
+autocmd FileType pm   setlocal shiftwidth=8 tabstop=8
+autocmd FileType pl   setlocal shiftwidth=8 tabstop=8
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Movement
@@ -242,6 +251,52 @@ endif
 au VimEnter * IndentGuidesEnable
 let g:indent_guides_start_level=2
 let g:indent_guides_guide_size=1
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Auto complete settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set omnifunc=syntaxcomplete#Complete
+autocmd FileType java setlocal omnifunc=javacomplete#Complete`
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" JavaComplete2
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  nmap <leader>jI <Plug>(JavaComplete-Imports-AddMissing)
+  nmap <leader>jR <Plug>(JavaComplete-Imports-RemoveUnused)
+  nmap <leader>ji <Plug>(JavaComplete-Imports-AddSmart)
+  nmap <leader>jii <Plug>(JavaComplete-Imports-Add)
+
+  imap <C-j>I <Plug>(JavaComplete-Imports-AddMissing)
+  imap <C-j>R <Plug>(JavaComplete-Imports-RemoveUnused)
+  imap <C-j>i <Plug>(JavaComplete-Imports-AddSmart)
+  imap <C-j>ii <Plug>(JavaComplete-Imports-Add)
+
+  nmap <leader>jM <Plug>(JavaComplete-Generate-AbstractMethods)
+
+  imap <C-j>jM <Plug>(JavaComplete-Generate-AbstractMethods)
+
+  nmap <leader>jA <Plug>(JavaComplete-Generate-Accessors)
+  nmap <leader>js <Plug>(JavaComplete-Generate-AccessorSetter)
+  nmap <leader>jg <Plug>(JavaComplete-Generate-AccessorGetter)
+  nmap <leader>ja <Plug>(JavaComplete-Generate-AccessorSetterGetter)
+  nmap <leader>jts <Plug>(JavaComplete-Generate-ToString)
+  nmap <leader>jeq <Plug>(JavaComplete-Generate-EqualsAndHashCode)
+  nmap <leader>jc <Plug>(JavaComplete-Generate-Constructor)
+  nmap <leader>jcc <Plug>(JavaComplete-Generate-DefaultConstructor)
+
+  imap <C-j>s <Plug>(JavaComplete-Generate-AccessorSetter)
+  imap <C-j>g <Plug>(JavaComplete-Generate-AccessorGetter)
+  imap <C-j>a <Plug>(JavaComplete-Generate-AccessorSetterGetter)
+
+  vmap <leader>js <Plug>(JavaComplete-Generate-AccessorSetter)
+  vmap <leader>jg <Plug>(JavaComplete-Generate-AccessorGetter)
+  vmap <leader>ja <Plug>(JavaComplete-Generate-AccessorSetterGetter)
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Neomake
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd! BufWritePost * Neomake
+
 
 "    _______ _______ _______ _______ _______ _______ 
 "   |\     /|\     /|\     /|\     /|\     /|\     /|
